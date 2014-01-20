@@ -14,12 +14,12 @@ import org.codingpedia.demo.rest.entities.Podcast;
 public class PodcastDaoJPA2Impl implements PodcastDao {
 
 	@PersistenceContext
-	private EntityManager em;
+	private EntityManager entityManager;
 	
 	public List<Podcast> getPodcasts() {
 		
 		String qlString = "SELECT p FROM Podcast p";
-		TypedQuery<Podcast> query = em.createQuery(qlString, Podcast.class);		
+		TypedQuery<Podcast> query = entityManager.createQuery(qlString, Podcast.class);		
 
 		return query.getResultList();
 	}
@@ -28,7 +28,7 @@ public class PodcastDaoJPA2Impl implements PodcastDao {
 		
 		try {
 			String qlString = "SELECT p FROM Podcast p WHERE p.id = ?1";
-			TypedQuery<Podcast> query = em.createQuery(qlString, Podcast.class);		
+			TypedQuery<Podcast> query = entityManager.createQuery(qlString, Podcast.class);		
 			query.setParameter(1, id);
 
 			return query.getSingleResult();
@@ -39,29 +39,29 @@ public class PodcastDaoJPA2Impl implements PodcastDao {
 
 	public Long deletePodcastById(Long id) {
 		
-		Podcast podcast = em.find(Podcast.class, id);
-		em.remove(podcast);
+		Podcast podcast = entityManager.find(Podcast.class, id);
+		entityManager.remove(podcast);
 		
 		return 1L;
 	}
 
 	public Long createPodcast(Podcast podcast) {
 		
-		em.persist(podcast);
-		em.flush();//force insert to receive the id of the podcast
+		entityManager.persist(podcast);
+		entityManager.flush();//force insert to receive the id of the podcast
 		
 		return podcast.getId();
 	}
 
 	public int updatePodcast(Podcast podcast) {
 		
-		em.merge(podcast);
+		entityManager.merge(podcast);
 		
 		return 1; 
 	}
 
 	public void deletePodcasts() {
-		Query query = em.createNativeQuery("TRUNCATE TABLE podcasts");		
+		Query query = entityManager.createNativeQuery("TRUNCATE TABLE podcasts");		
 		query.executeUpdate();
 	}
 

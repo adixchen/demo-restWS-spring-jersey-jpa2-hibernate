@@ -1,4 +1,4 @@
-demo-restWS-spring-jersey-tomcat-mybatis
+demo-restWS-spring-jersey-jpa2-hibernate
 ========================================
 
-Visit http://www.codingpedia.org/ama/restful-web-services-example-in-java-with-jersey-spring-and-mybatis/ for the explanation of the code
+Visit http://www.codingpedia.org/ama/java-persistence-example-with-spring-jpa2-and-hibernate/ for the explanation of the code
