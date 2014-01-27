@@ -10,7 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codingpedia.demo.rest.service.helper.CustomJsonDateDeserializer;
 import org.codingpedia.demo.rest.service.helper.CustomJsonDateSerializer;
 
 /**
@@ -49,9 +51,10 @@ public class Podcast implements Serializable {
 	@Column(name="description")
 	private String description; 
 		
-	/** when an episode was last published on the feed*/
+	/** insertion date in the database */
 	@Column(name="insertion_date")
-	@JsonSerialize(using = CustomJsonDateSerializer.class)	
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)	
 	private Date insertionDate;
 
 	public Podcast(){}
