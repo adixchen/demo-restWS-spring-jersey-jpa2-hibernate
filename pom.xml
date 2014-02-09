@@ -123,7 +123,7 @@
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-client</artifactId>
-			<version>2.4.1</version>
+			<version>2.4.1</version>			
 		</dependency>		
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -154,13 +154,6 @@
 					<artifactId>groovy</artifactId>
 				</exclusion>
 			</exclusions>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.groovy</groupId>
-			<artifactId>groovy-all</artifactId>
-			<!-- Needs to be the same version that REST Assured depends on -->
-			<version>2.2.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
