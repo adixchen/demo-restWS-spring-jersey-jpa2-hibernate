@@ -12,14 +12,12 @@ Create db schema by executing https://github.com/amacoder/demo-restWS-spring-jer
 
 Run the example
 ==
-- Download the project 
+- Download/clone the project 
 - Import in Eclipse 
 - Run Configuration -> Goals "clean install jetty:run"
 
 Go to blog post
 ==
 Visit 
-
 http://www.codingpedia.org/ama/java-persistence-example-with-spring-jpa2-and-hibernate/
-
 for the explanation of the code
