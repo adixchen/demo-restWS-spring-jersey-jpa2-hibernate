@@ -13,6 +13,8 @@ public interface PodcastDao {
 	
 	public List<Podcast> getPodcasts();
 
+	public List<Podcast> getRecentPodcasts(int numberOfDaysToLookBack);
+	
 	/**
 	 * Returns a podcast given its id
 	 * 

@@ -112,6 +112,13 @@ public class PodcastRestService {
 	}
 
 	@GET
+	@Path("recent/{numberDaysToLookBack}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public List<Podcast> getRecentPodcasts(@PathParam("numberDaysToLookBack") Integer numberDaysToLookBack) {
+		return podcastDao.getRecentPodcasts(numberDaysToLookBack);
+	}
+	
+	@GET
 	@Path("{id}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response findById(@PathParam("id") Long id) {
