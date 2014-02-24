@@ -13,8 +13,11 @@ import org.codingpedia.demo.rest.entities.Podcast;
 
 public class PodcastDaoJPA2Impl implements PodcastDao {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="demoRestPersistence")
 	private EntityManager entityManager;
+
+	@PersistenceContext(unitName="demoRestPersistenceLegacy")
+	private EntityManager entityManagerLegacy;
 	
 	public List<Podcast> getPodcasts() {
 		
@@ -63,6 +66,26 @@ public class PodcastDaoJPA2Impl implements PodcastDao {
 	public void deletePodcasts() {
 		Query query = entityManager.createNativeQuery("TRUNCATE TABLE podcasts");		
 		query.executeUpdate();
+	}
+
+	public List<Podcast> getLegacyPodcasts() {
+		
+		String qlString = "SELECT p FROM Podcast p";
+		TypedQuery<Podcast> query = entityManagerLegacy.createQuery(qlString, Podcast.class);		
+
+		return query.getResultList();
+	}
+
+	public Podcast getLegacyPodcastById(Long id) {
+		try {
+			String qlString = "SELECT p FROM Podcast p WHERE p.id = ?1";
+			TypedQuery<Podcast> query = entityManagerLegacy.createQuery(qlString, Podcast.class);		
+			query.setParameter(1, id);
+
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

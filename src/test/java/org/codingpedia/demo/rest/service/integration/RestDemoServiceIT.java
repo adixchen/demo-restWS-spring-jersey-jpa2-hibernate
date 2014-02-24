@@ -53,7 +53,7 @@ public class RestDemoServiceIT {
 	}
 
 	@Test
-	public void testGetPodcast() throws JsonGenerationException,
+	public void testGetLegacyPodcast() throws JsonGenerationException,
 			JsonMappingException, IOException {
 
 		ClientConfig clientConfig = new ClientConfig();
@@ -78,4 +78,62 @@ public class RestDemoServiceIT {
 								.writeValueAsString(podcast));
 
 	}
+	
+	@Test
+	public void testGetLegacyPodcasts() throws JsonGenerationException,
+			JsonMappingException, IOException {
+
+		ClientConfig clientConfig = new ClientConfig();
+		clientConfig.register(JacksonFeature.class);
+
+		Client client = ClientBuilder.newClient(clientConfig);
+
+		WebTarget webTarget = client
+				.target("http://localhost:8888/demo-rest-spring-jersey-jpa2-hibernate-0.0.1-SNAPSHOT/legacy/podcasts/");
+
+		Builder request = webTarget.request();
+		request.header("Content-type", MediaType.APPLICATION_JSON);
+
+		Response response = request.get();
+		Assert.assertTrue(response.getStatus() == 200);
+
+		List<Podcast> podcasts = response
+				.readEntity(new GenericType<List<Podcast>>() {
+				});
+
+		ObjectMapper mapper = new ObjectMapper();
+		System.out.print(mapper.writerWithDefaultPrettyPrinter()
+				.writeValueAsString(podcasts));
+
+		Assert.assertTrue("At least one podcast is present in the LEGACY",
+				podcasts.size() > 0);
+	}
+
+	@Test
+	public void testGetPodcast() throws JsonGenerationException,
+			JsonMappingException, IOException {
+
+		ClientConfig clientConfig = new ClientConfig();
+		clientConfig.register(JacksonFeature.class);
+
+		Client client = ClientBuilder.newClient(clientConfig);
+
+		WebTarget webTarget = client
+				.target("http://localhost:8888/demo-rest-spring-jersey-jpa2-hibernate-0.0.1-SNAPSHOT/legacy/podcasts/2");
+
+		Builder request = webTarget.request(MediaType.APPLICATION_JSON);
+
+		Response response = request.get();
+		Assert.assertTrue(response.getStatus() == 200);
+
+		Podcast podcast = response.readEntity(Podcast.class);
+
+		ObjectMapper mapper = new ObjectMapper();
+		System.out
+				.print("Received podcast from LEGACY database *************************** "
+						+ mapper.writerWithDefaultPrettyPrinter()
+								.writeValueAsString(podcast));
+
+	}
+	
 }

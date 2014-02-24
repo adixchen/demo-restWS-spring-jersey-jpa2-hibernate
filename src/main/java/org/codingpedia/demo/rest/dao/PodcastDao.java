@@ -28,6 +28,20 @@ public interface PodcastDao {
 	public int updatePodcast(Podcast podcast);
 
 	/** removes all podcasts */
-	public void deletePodcasts();	
+	public void deletePodcasts();
+
+	/** 
+	 * Returns all podcasts from "legacy" system
+	 * @return
+	 */
+	public List<Podcast> getLegacyPodcasts();
+	
+	/**
+	 * Returns a "legacy" podcast given its id
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Podcast getLegacyPodcastById(Long id);	
 
 }

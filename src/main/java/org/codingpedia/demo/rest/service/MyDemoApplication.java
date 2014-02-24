@@ -18,6 +18,7 @@ public class MyDemoApplication extends ResourceConfig {
 	public MyDemoApplication(){
 		register(RequestContextFilter.class);
 		register(PodcastRestService.class);
+		register(PodcastLegacyRestService.class);
 		register(JacksonFeature.class);		
 	}
 }

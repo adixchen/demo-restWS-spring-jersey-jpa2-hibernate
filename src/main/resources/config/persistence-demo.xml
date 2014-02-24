@@ -2,5 +2,8 @@
    <persistence-unit name="demoRestPersistence">
       <provider>org.hibernate.ejb.HibernatePersistence</provider>
    </persistence-unit>
-  <!-- hack to make it work on WebLogic - if this file is called persistence.xml it will be interpreted by WebLogic which will cause a crash -->
+
+   <persistence-unit name="demoRestPersistenceLegacy">
+      <provider>org.hibernate.ejb.HibernatePersistence</provider>
+   </persistence-unit>   
 </persistence>
