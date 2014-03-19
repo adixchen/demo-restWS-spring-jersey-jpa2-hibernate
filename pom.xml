@@ -170,13 +170,7 @@
 			<version>2.5.1</version>
 		</dependency>
 		
-		<!-- LogBack dependencies -->
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-			<version>${logback.version}</version>
-		</dependency>
- 
+		<!-- LogBack dependencies --> 
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
