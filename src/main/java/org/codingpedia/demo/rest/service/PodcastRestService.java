@@ -1,5 +1,6 @@
 package org.codingpedia.demo.rest.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -14,8 +15,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.codingpedia.demo.rest.dao.PodcastDao;
 import org.codingpedia.demo.rest.entities.Podcast;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -104,11 +110,17 @@ public class PodcastRestService {
 	 * Returns all resources (podcasts) from the database
 	 * 
 	 * @return
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonGenerationException 
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public List<Podcast> getPodcasts() {
-		return podcastDao.getPodcasts();
+	public List<Podcast> getPodcasts() throws JsonGenerationException, JsonMappingException, IOException {
+		
+		List<Podcast> podcasts = podcastDao.getPodcasts();		
+		
+		return podcasts; 
 	}
 
 	@GET
@@ -121,7 +133,8 @@ public class PodcastRestService {
 	@GET
 	@Path("{id}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response findById(@PathParam("id") Long id) {
+	public Response findById(@PathParam("id") Long id) throws JsonGenerationException, JsonMappingException, IOException {
+		
 		Podcast podcastById = podcastDao.getPodcastById(id);
 		if (podcastById != null) {
 			return Response.status(200).entity(podcastById).build();
