@@ -21,5 +21,4 @@ implements ContainerResponseFilter {
 		headers.add("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, X-Codingpedia");
 	}
 
-
 }

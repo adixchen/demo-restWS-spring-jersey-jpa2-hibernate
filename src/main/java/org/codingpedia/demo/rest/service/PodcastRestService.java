@@ -133,12 +133,18 @@ public class PodcastRestService {
 	public Response findById(@PathParam("id") Long id) throws JsonGenerationException, JsonMappingException, IOException {
 		
 		Podcast podcastById = podcastDao.getPodcastById(id);
+		
 		if (podcastById != null) {
-			return Response.status(200).entity(podcastById).build();
+			return Response
+					.status(200)
+					.entity(podcastById)
+					.header("Access-Control-Allow-Headers", "X-extra-header")
+					.allow("OPTIONS")
+					.build();
 		} else {
 			return Response
 					.status(404)
-					.entity("The podcast with the id " + id + " does not exist")
+					.entity("The podcast with the id " + id + " does not exist")					
 					.build();
 		}
 	}
