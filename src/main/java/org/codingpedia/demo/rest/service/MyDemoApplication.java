@@ -1,5 +1,6 @@
 package org.codingpedia.demo.rest.service;
 
+import org.codingpedia.demo.rest.util.CORSResponseFilter;
 import org.codingpedia.demo.rest.util.LoggingResponseFilter;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -22,5 +23,6 @@ public class MyDemoApplication extends ResourceConfig {
 		register(PodcastLegacyRestService.class);
 		register(JacksonFeature.class);	
 		register(LoggingResponseFilter.class);
+		register(CORSResponseFilter.class);
 	}
 }
